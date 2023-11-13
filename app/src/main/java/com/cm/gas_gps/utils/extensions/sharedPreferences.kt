@@ -7,8 +7,6 @@ class sharedPreferences (
 ) {
 
     companion object {
-        private const val TAG_TOKEN = "TOKEN"
-        private const val TAG_ID_USER = "ID_USER"
         private const val TAG_CORREO = "CORREO"
         private const val TAG_NOMBRE = "NOMBRE"
     }
@@ -24,6 +22,5 @@ class sharedPreferences (
     }
 
     fun getCorreo(): String? = localStorage.getString(TAG_CORREO, "")
-
 
 }

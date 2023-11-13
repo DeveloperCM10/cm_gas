@@ -39,13 +39,13 @@ class RutasFragment : Fragment(){
         with(binding){
             txtRutas.setOnClickListener {
 
-                val fragmentB = ConsumosFragment()
-                activity?.getSupportFragmentManager()?.beginTransaction()
-                    ?.replace(R.id.acvityNavigationNav, fragmentB, "fragmentConsumos")
-                    ?.addToBackStack("const_rutas")
-                    ?.commit();
+//                val fragmentB = ConsumosFragment()
+//                activity?.getSupportFragmentManager()?.beginTransaction()
+//                    ?.replace(R.id.acvityNavigationNav, fragmentB, "fragmentConsumos")
+//                    ?.addToBackStack("const_rutas")
+//                    ?.commit();
 
-//                findNavController().navigate(RutasFragmentDirections.actionNextToRutas())
+                findNavController().navigate(RutasFragmentDirections.actionNextToRutas())
 
             }
 

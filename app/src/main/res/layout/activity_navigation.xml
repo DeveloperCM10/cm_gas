@@ -15,7 +15,7 @@
         app:itemTextColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/menu_top"
-        android:background="@color/graydis"
+        android:background="@color/primary_green"
         style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:theme="@style/MyThemeOverlay_Toolbar"
         tools:ignore="MissingConstraints">
@@ -45,7 +45,7 @@
         android:id="@+id/activityNavigationMenuBottom"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/graydis"
+        android:background="@color/primary_green"
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:itemIconSize="30dp"

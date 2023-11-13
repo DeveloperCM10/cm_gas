@@ -12,12 +12,12 @@
 
         <item
             android:id="@+id/action_rutas"
-            android:icon="@drawable/ic_rutas"
+            android:icon="@drawable/rutas_start"
             android:title="@string/rutas" />
 
         <item
             android:id="@+id/action_consumos"
-            android:icon="@drawable/ic_consumos"
+            android:icon="@drawable/consumos_start"
             android:title="@string/consumos"/>
 
     </group>
