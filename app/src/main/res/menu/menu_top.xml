@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/ic_notification"
+        android:icon="@drawable/ic_notification"
+        android:title=""
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/ic_settings"
+        android:icon="@drawable/ic_settings"
+        android:title=""
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_users"
+                android:icon="@drawable/ic_users_add"
+                android:iconTint="#FFFFFF"
+                android:title="@string/usuarios" />
+            <item
+                android:id="@+id/action_cars"
+                android:icon="@drawable/ic_car"
+                android:iconTint="#FFFFFF"
+                app:showAsAction="never"
+                android:title="@string/autos" />
+
+            <item
+                android:id="@+id/action_change_pass"
+                android:icon="@drawable/ic_change_pass"
+                android:iconTint="#FFFFFF"
+                app:showAsAction="never"
+                android:title="@string/chage_pass" />
+
+            <item
+                android:id="@+id/action_logout"
+                android:icon="@drawable/ic_logout"
+                android:iconTint="#FFFFFF"
+                app:showAsAction="never"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+</menu>

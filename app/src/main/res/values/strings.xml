@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">GASOLINA Y GPS CM</string>
+    <string name="ubicaciones">UBICACIONES</string>
+    <string name="rutas">RUTAS</string>
+    <string name="consumos">CONSUMOS</string>
+    <string name="login">LOGIN</string>
+    <string name="usuarios">Usuarios</string>
+    <string name="autos">Vehículos</string>
+    <string name="chage_pass">Cambiar contraseña</string>
+    <string name="logout">Cerrar sesión</string>
+    <string name="users">USUARIOS</string>
+    <string name="cars">VEHÍCULOS</string>
+    <string name="notificaciones">NOTIFICACIONES</string>
+    <string name="btn_enviar">Enviar</string>
+    <string name="btn_cancelar">Cancelar</string>
+
+</resources>

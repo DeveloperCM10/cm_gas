@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <group>
+
+        <item
+            android:id="@+id/action_mapa"
+            android:icon="@drawable/ic_maps"
+            android:title="@string/ubicaciones" />
+
+        <item
+            android:id="@+id/action_rutas"
+            android:icon="@drawable/ic_rutas"
+            android:title="@string/rutas" />
+
+        <item
+            android:id="@+id/action_consumos"
+            android:icon="@drawable/ic_consumos"
+            android:title="@string/consumos"/>
+
+    </group>
+
+</menu>
