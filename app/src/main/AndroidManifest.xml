@@ -28,6 +28,11 @@
         android:forceDarkAllowed="false"
         android:configChanges="orientation|keyboardHidden|screenSize|uiMode"
         android:windowSoftInputMode="adjustPan|adjustResize">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">
