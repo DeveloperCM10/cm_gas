@@ -2,6 +2,7 @@ package com.cm.gas_gps.ui.ubicaciones
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,6 +11,7 @@ import android.graphics.Color
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,9 +21,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.cm.gas_gps.R
+import com.cm.gas_gps.api.ApiService
 import com.cm.gas_gps.databinding.FragmentUbicacionesBinding
 import com.cm.gas_gps.models.dtoUbicacionesModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -29,7 +33,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 
 class UbicacionesFragment : Fragment(), OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener,
@@ -45,8 +51,6 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
     lateinit var markerDatos: Marker
     lateinit var locationManager: LocationManager
     lateinit var finRuta : LatLng
-    var googleMap:GoogleMap?= null
-    var poly: Polyline? = null
     var polylineOptions : PolylineOptions? = null
     var polyline: Polyline? = null
 
@@ -69,7 +73,48 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
         super.onViewCreated(view, savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        viewModel.loadingMostrar()
         this.checkPermisos()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        polyline = null
+        polylineOptions = null
+        binding.lyDetalleVehiculo.visibility = View.GONE
+        listUbicaciones = listOf()
+        polyline?.remove()
+
+            if(ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission
+                .ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+
+                viewModel.loadingMostrar()
+                this.checkPermisos()
+
+            }
+            else{
+
+                this.checkPermisos()
+                viewModel.loadingCerrar()
+            }
+
+        val appUpdateManager = AppUpdateManagerFactory.create(requireActivity())
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
+            ) {
+                Log.e("aqui", "si available")
+                appUpdateManager?.startUpdateFlowForResult(
+                    appUpdateInfo, AppUpdateType.IMMEDIATE,
+                    requireActivity(),
+                    1
+                )
+            } else {
+                Log.e("aqui", "no available")
+            }
+        }
 
     }
 
@@ -81,13 +126,35 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
             this.createMaps()
         }
         else{
-            Log.e("aqui","1")
             this.createMaps()
+        }
+
+        with(binding){
+            binding.lyDetalleVehiculo.visibility = View.GONE
+
+            imgCerrar.setOnClickListener {
+                binding.lyDetalleVehiculo.visibility = View.GONE
+                listUbicaciones = listOf()
+                polyline?.remove()
+                map.clear()
+                viewModel.loadingMostrar()
+                createMarkerVehiculos()
+                createMarkerPersona()
+            }
         }
 
     }
 
     fun initializeObserver(){
+        viewModel.loading.observe(viewLifecycleOwner){
+            if (it) {
+                binding.loadingMaps.visibility = View.VISIBLE
+            }
+            else{
+                binding.loadingMaps.visibility= View.GONE
+            }
+        }
+
         viewModel.ubicaciones.observe(viewLifecycleOwner){
             if (it != null) {
                 listUbicaciones = it.data
@@ -123,9 +190,11 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
                     .icon(bitmapDescriptorFromVector(requireContext(),R.drawable.car_img))
             )!!
 
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(variable, 13f))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(variable, 10f))
 
         }
+
+        viewModel.loadingCerrar()
 
     }
 
@@ -133,7 +202,6 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
 
         if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)){
-                Log.e("aqui", "llego1")
                 requestPermissionLauncher.launch(
                     arrayOf(
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -141,7 +209,6 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
                     ))
             }
             else{
-                Log.e("aqui", "llego2")
                 requestPermissionLauncher.launch(
                     arrayOf(
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -150,8 +217,6 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
             }
         }
         else{
-
-            Log.e("aqui", "llego3")
             this.initializeListener()
             this.initializeObserver()
         }
@@ -193,6 +258,7 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
             }
         }
     }
+
     @SuppressLint("MissingPermission")
     private fun createMarkerPersona() {
         Log.e("persona","aqui")
@@ -213,10 +279,9 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
                 MarkerOptions()
                     .position(variableYo)
                     .title("Mi ubicación")
-                    .snippet("Mi ubicación")
                     .icon(bitmapDescriptorFromVector(requireContext(),  R.drawable.ic_ubicacion_actual))
             )!!
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(variableYo, 13f))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(variableYo, 10f))
 
     }
 
@@ -247,8 +312,8 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
     override fun onMapReady(googleMap: GoogleMap) {
         this.map = googleMap
         viewModel.vehiculos()
-       map.setOnMyLocationButtonClickListener(this)
-                map.setOnMarkerClickListener(this)
+        map.setOnMyLocationButtonClickListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
     private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
@@ -280,25 +345,37 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
         }
     }
 
-
     override fun onMyLocationButtonClick(): Boolean {
         Toast.makeText(requireContext(),"Mi Ubicación actual", Toast.LENGTH_LONG).show()
         return false
     }
 
     override fun onMarkerClick(market: Marker): Boolean {
-        listUbicaciones = listOf()
-        polyline?.remove()
-       listVehiculos.forEach {
-           if(market.title == it.nombre_location){
-               finRuta = LatLng(it.latitud_location,it.longitude_location)
-               viewModel.ubicaiones()
-           }
-       }
+        if(market.title.equals("Mi ubicación")) {
+            viewModel.loadingCerrar()
+            binding.lyDetalleVehiculo.visibility = View.GONE
+            listUbicaciones = listOf()
+            map.clear()
+            createMarkerVehiculos()
+            createMarkerPersona()
+        }
+        else{
+            viewModel.loadingMostrar()
+            listUbicaciones = listOf()
+            polyline?.remove()
+            binding.lyDetalleVehiculo.visibility = View.GONE
+            listVehiculos.forEach {
+                if (market.title == it.nombre_location) {
+                    finRuta = LatLng(it.latitud_location, it.longitude_location)
+                    viewModel.ubicaiones()
+                }
+            }
+        }
 
         return false
     }
 
+    @SuppressLint("SuspiciousIndentation")
     fun createRoute(){
 
         activity?.runOnUiThread{
@@ -310,14 +387,12 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
                 polylinesLt.add(lat)
             }
 
-
 //            polylineOptions = PolylineOptions()
 //                .clickable(true)
 //                .addAll(
 //                   polylinesLt
 //                )
 //                .color(Color.BLUE)
-
 
             polylineOptions = PolylineOptions()
                 .clickable(true)
@@ -330,12 +405,13 @@ class UbicacionesFragment : Fragment(), OnMapReadyCallback,
                     finRuta
 
                 )
-                .color(Color.BLUE)
+                .color(Color.parseColor("#416864"))
 
             polyline = map.addPolyline(polylineOptions!!)
-            polyline!!.startCap = CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.fin_ruta))
+            polyline!!.startCap = CustomCap(BitmapDescriptorFactory.fromResource(R.drawable.start_points))
 
-
+            binding.lyDetalleVehiculo.visibility = View.VISIBLE
+            viewModel.loadingCerrar()
 
         }
     }

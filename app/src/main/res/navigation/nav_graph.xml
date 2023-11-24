@@ -31,8 +31,8 @@
     <fragment
         android:id="@+id/fragment_consumos"
         android:label="@string/consumos"
-        android:name="com.cm.gas_gps.ui.consumos.ConsumosFragment"
-        tools:layout="@layout/fragment_consumos">
+        android:name="com.cm.gas_gps.ui.historial.HistorialFragment"
+        tools:layout="@layout/fragment_historial">
 
     </fragment>
 

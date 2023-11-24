@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/borde_gris_redondo"
+        android:padding="20dp"
+        tools:ignore="MissingConstraints">
+
+        <ImageView
+            android:id="@+id/img_ruta"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_road"
+            tools:ignore="MissingConstraints"
+            android:padding="5dp"
+            android:background="@drawable/borde_verde_redondo"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_fechaRuta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="23/11/2023"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/txt_nombre_ruta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Carranza - León"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintWidth_percent="0.4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta" />
+
+        <TextView
+            android:id="@+id/txt_conductor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Conductor: Freddy Luna"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_nombre_ruta"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta"/>
+
+        <TextView
+            android:id="@+id/txt_km"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recorrido: 125 km"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_conductor"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta"/>
+
+        <TextView
+            android:id="@+id/txt_tanque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tanque: 3/4"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/txt_km"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/shadow"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="@drawable/shadow_13395"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

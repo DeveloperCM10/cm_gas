@@ -114,4 +114,15 @@ class UbicacionesViewModel (application: Application): AndroidViewModel(applicat
 
         })
     }
+
+    private val _loading: MutableLiveData<Boolean> = MutableLiveData()
+    val loading: LiveData<Boolean> get() = _loading
+
+    fun loadingMostrar(){
+        _loading.postValue(true)
+    }
+
+    fun loadingCerrar(){
+        _loading.postValue(false)
+    }
 }

@@ -59,7 +59,6 @@ class NavigationActivity : AppCompatActivity(){
         navController.popBackStack()
     }
 
-
     override fun onResume() {
         super.onResume()
         initializeNavigation()

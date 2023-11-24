@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.cm.gas_gps.R
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.cm.gas_gps.adapters.rutas.RutasAdapter
 import com.cm.gas_gps.databinding.FragmentRutasBinding
-import com.cm.gas_gps.ui.consumos.ConsumosFragment
+import com.cm.gas_gps.utils.SwipeGesture.SwipeGesture
 
 class RutasFragment : Fragment(){
     private lateinit var binding: FragmentRutasBinding
@@ -35,20 +36,28 @@ class RutasFragment : Fragment(){
     }
 
     fun initializeListener(){
-
+        this.initializeAdapter()
         with(binding){
-            txtRutas.setOnClickListener {
-
-//                val fragmentB = ConsumosFragment()
-//                activity?.getSupportFragmentManager()?.beginTransaction()
-//                    ?.replace(R.id.acvityNavigationNav, fragmentB, "fragmentConsumos")
-//                    ?.addToBackStack("const_rutas")
-//                    ?.commit();
-
-                findNavController().navigate(RutasFragmentDirections.actionNextToRutas())
-
-            }
 
         }
+    }
+
+    private fun initializeAdapter() {
+        val swipegesture  = object : SwipeGesture(requireContext()){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                when(direction){
+                    ItemTouchHelper.LEFT ->{
+
+                    }
+
+                }
+
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipegesture)
+        itemTouchHelper.attachToRecyclerView( binding.rvListaRutas)
+
+        binding.rvListaRutas.adapter = RutasAdapter()
     }
 }

@@ -2,7 +2,7 @@
     <string name="app_name">GASOLINA Y GPS CM</string>
     <string name="ubicaciones">UBICACIONES</string>
     <string name="rutas">RUTAS</string>
-    <string name="consumos">CONSUMOS</string>
+    <string name="consumos">HISTORIAL</string>
     <string name="login">LOGIN</string>
     <string name="usuarios">Usuarios</string>
     <string name="autos">Vehículos</string>
