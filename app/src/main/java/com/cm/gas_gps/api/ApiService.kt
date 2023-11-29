@@ -10,8 +10,9 @@ class ApiService {
 
     companion object {
 //        const val ENDPOINT = "https://pagos.gphsis.com/api/"
+//        const val ENDPOINT="http://192.168.30.135:3000/api/"
+        const val ENDPOINT = "http://192.168.30.152:4142/api/"
 
-        const val ENDPOINT="http://192.168.30.135:3000/api/"
         private lateinit var retrofit: Retrofit
 
         fun getInstance(): Retrofit {
@@ -35,7 +36,7 @@ class ApiService {
                     .build()
                 Log.e("retrofit", retrofit.toString())
             } else {
-                Log.e("retrofit", retrofit.toString())
+                Log.e("retrofitError", retrofit.toString())
             }
 
             return retrofit

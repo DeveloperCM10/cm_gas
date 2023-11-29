@@ -21,8 +21,8 @@
         tools:layout="@layout/fragment_rutas">
 
         <action
-            android:id="@+id/action_next_to_rutas"
-            app:destination="@+id/fragment_consumos"
+            android:id="@+id/action_next_to_geofences"
+            app:destination="@+id/fragment_geofences"
             app:popUpTo="@+id/fragment_rutas"
             app:popUpToInclusive="true"/>
 
@@ -57,6 +57,14 @@
         android:label="@string/notificaciones"
         android:name="com.cm.gas_gps.ui.notificaciones.NotificacionesFragment"
         tools:layout="@layout/fragment_notificaciones">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_geofences"
+        android:label="@string/geofences"
+        android:name="com.cm.gas_gps.ui.geofences.GeofencesFragment"
+        tools:layout="@layout/fragment_rutas">
 
     </fragment>
 

@@ -28,7 +28,6 @@ import com.cm.gas_gps.utils.extensions.AccionesDialog
 import com.cm.gas_gps.utils.extensions.sharedPreferences
 import com.google.android.material.snackbar.Snackbar
 
-
 class NavigationActivity : AppCompatActivity(){
     private lateinit var binding: ActivityNavigationBinding
     private  lateinit var navController: NavController

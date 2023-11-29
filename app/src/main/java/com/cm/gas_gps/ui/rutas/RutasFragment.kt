@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.cm.gas_gps.adapters.rutas.RutasAdapter
@@ -38,7 +39,9 @@ class RutasFragment : Fragment(){
     fun initializeListener(){
         this.initializeAdapter()
         with(binding){
-
+            btnAddGeofences.setOnClickListener {
+                findNavController().navigate(RutasFragmentDirections.actionNextToGeofences())
+            }
         }
     }
 

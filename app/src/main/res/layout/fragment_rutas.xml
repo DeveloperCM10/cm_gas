@@ -48,5 +48,16 @@
         app:layout_constraintTop_toBottomOf="@+id/btnBuscar"
         tools:layout_editor_absoluteX="0dp" />
 
+    <ImageView
+        android:id="@+id/btn_add_geofences"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add_geofences"
+        android:background="@drawable/borde_verde_redondo"
+        android:padding="15dp"
+        android:layout_margin="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,26 +16,16 @@
 
         <ImageView
             android:id="@+id/img_ruta"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/ic_car_white"
             tools:ignore="MissingConstraints"
             android:padding="5dp"
+            app:layout_constraintWidth_percent="0.2"
             android:background="@drawable/borde_verde_redondo"
             app:layout_constraintHeight_percent="1"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/txt_nombreVehiculo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Spark 3"
-            android:layout_marginLeft="10dp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintWidth_percent="0.4"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/img_ruta" />
 
         <TextView
             android:id="@+id/txt_numeroPlaca"
@@ -43,18 +33,30 @@
             android:layout_height="wrap_content"
             android:text="Placa:  12345678"
             android:layout_marginLeft="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.4"
-            app:layout_constraintStart_toEndOf="@+id/txt_nombreVehiculo" />
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta" />
 
         <TextView
-            android:id="@+id/txt_numeroSerie"
+            android:id="@+id/txt_modelo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Serie:  12345678"
+            android:text="Modelo:  12345678"
             android:layout_marginLeft="10dp"
-            app:layout_constraintWidth_percent="0.4"
-            app:layout_constraintTop_toBottomOf="@+id/txt_nombreVehiculo"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/txt_numeroPlaca"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta" />
+
+        <TextView
+            android:id="@+id/txt_imei"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="IMEI:  12345678"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/txt_modelo"
             app:layout_constraintStart_toEndOf="@+id/img_ruta" />
 
         <TextView
@@ -62,10 +64,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Color:  Verde"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintWidth_percent="0.4"
+            android:layout_marginLeft="5dp"
+            app:layout_constraintWidth_percent="0.3"
             app:layout_constraintTop_toBottomOf="@+id/txt_numeroPlaca"
-            app:layout_constraintStart_toEndOf="@+id/txt_numeroSerie"/>
+            app:layout_constraintStart_toEndOf="@+id/txt_modelo"/>
+
+        <TextView
+            android:id="@+id/txt_icc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ICC:  12345678"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/txt_imei"
+            app:layout_constraintStart_toEndOf="@+id/img_ruta" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,6 +6,6 @@ import retrofit2.http.POST
 
 interface ApiUbicacionesInterface {
 
-    @POST("references/locations_offices_pagos")
+    @POST("http://192.168.30.135:3000/api/references/locations_offices_pagos")
     fun getUbicaciones(): Call<DataUbicacionesModel>
 }

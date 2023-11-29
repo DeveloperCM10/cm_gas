@@ -45,7 +45,7 @@ abstract class SwipeGestureVehiculos(context: Context) : ItemTouchHelper.SimpleC
         )
             .addSwipeLeftBackgroundColor(aceptarColor)
             .addSwipeLeftActionIcon(iconAceptar)
-            .addSwipeLeftLabel("HISTORIAL")
+            .addSwipeLeftLabel("ASIGNAR RUTA")
             .setSwipeLeftLabelColor(Color.WHITE)
             .addSwipeRightBackgroundColor(editarColor)
             .addSwipeRightActionIcon(iconAceptar)
